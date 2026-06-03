@@ -1207,9 +1207,9 @@ the following steps:
  </tr>
 
  <tr>
-  <td><dfn>no such accessible node</dfn>
+  <td><dfn>no such accessibility node</dfn>
   <td>404
-  <td><code>no such accessible node</code>
+  <td><code>no such accessibility node</code>
   <td>An <a>accessibility node</a> could not be located on the page
    using the given search parameters.
  </tr>
@@ -1274,14 +1274,6 @@ the following steps:
   <td>500
   <td><code>session not created</code>
   <td>A new <a>session</a> could not be created.
- </tr>
-
- <tr>
-  <td><dfn>stale accessible node reference</dfn>
-  <td>404
-  <td><code>stale accessible node reference</code>
-  <td>A <a>command</a> failed because
-   the referenced <a>accessible node</a> is no longer available.
  </tr>
 
  <tr>
@@ -6086,10 +6078,9 @@ variables</var> and <var>parameters</var> are:
         of <a>trying</a> to <a>get a known element</a>
         with <var>URL variables</var>["<code>element id</code>"].
 
-    <li><p>Let <var>accessible</var> be the <a>accessible node</a> that corresponds to this element in the <a>accessibility tree</a>.
+    <li><p>Let <var>accessible</var> be the <a>accessibility node</a> that corresponds to this element. If no <a>accessibility node</a> exists, return <a>error</a> with <a>error code</a> <a>no such accessibility node</a>.
 
     <li><p>Let <var>properties</var> be the result of computing the <a>accessibility properties</a> of <var>accessible</var>.
-
 
     <li><p>Return <a>success</a> with data <var>properties</var>.
   </ol>
@@ -11185,33 +11176,25 @@ variables</var> and <var>parameters</var> are:
 <section>
 <h2>Accessibility</h2>
 
-<p> An <dfn>accessibility ID</dfn> is a string value representing a handle to an <a>accessible node</a> in a specific WebDriver session.
+<p> An <dfn>accessibility ID</dfn> is a string value representing a handle to an <a>accessibility node</a> in a specific WebDriver session.
 
-<p> An <dfn>accessibility node</dfn> is a node in the implementation defined <a>internal accessibility tree</a>. These nodes frequently but not always correlated to DOM elements.
+<p> An <dfn>accessibility node</dfn> is a platform-independent, implementation-defined node in the platform-independent, implementation-defined accessibility tree. The platform-independent, implementation defined accessibility tree is built from the DOM tree for the purposes of interacting with the web page via an <a>accessibility API</a>. Accessibility nodes might exist in this tree for which there is no DOM element back it (for example, one might be create to represent a CSS pseudo element). Additionally, an accessibility node might not be created for every DOM node (for example, if something is intentionally hidden from accessibility APIs using <a>aria-hidden</a>). See the ARIA definition of the <a>accessibility tree</a> for more information.
 
-<p> <dfn>Accessibility properties</dfn> is a JSON <a>Object</a> that contains the relevant <a>computed accessibility properties</a> of an <a>accessiblity node</a>, as well as the following properties:
+<p> <dfn>Accessibility properties</dfn> is a JSON <a>Object</a> that contains the relevant <a>computed accessibility properties</a> of an <a>accessibility node</a>, as well as the following properties:
 
   <dl>
    <dt>"<code>accessibilityId</code>"
-   <dd>The <a>accessibility ID</a> of this <a>accessible node</a>.
+   <dd>The <a>accessibility ID</a> of this <a>accessibility node</a>.
 
    <dt>"<code>parent</code>"
-   <dd>The <a>accessibility ID</a> of the parent of this <a>accessible node</a> in the <a>accessibility tree</a>, including <a>ignored accessible nodes</a>.
+   <dd>The <a>accessibility ID</a> of the parent of this <a>accessibility node</a> in the <a>accessibility tree</a>.
 
    <dt>"<code>children</code>"
-   <dd>A list of <a>accessibility IDs</a> representing the child nodes of this <a>accessible node</a> in the implementation’s <a>internal accessibility tree</a>
+   <dd>A list of <a>accessibility IDs</a> representing the child nodes of this <a>accessibility node</a> in the <a>accessibility tree</a>.
   </dl>
 
-<p> <dfn>Ignored accessible nodes</dfn> are accessible nodes that represent <a>elements which are excluded from the accessibility tree</a>. The <a>accessibility properties</a> of these <a>accessible nodes</a> must only have the keys <va>accessibilityID</var>, <va>parent</var>, <va>children</var> and <va>role</var> set to <code>"none"</code>.
-
-<p>To <dfn>get a known accessible node</dfn> given <var>session</var> and <var>reference</var>:
-
-<ol class="algorithm">
-  <li><p>TO DO: Should we create a parallel to the specification of <a>get a known element</a>? Do we need to make a parallel structure to <a>browsing context group node map</a> and <a>node id map</a>?
-</ol>
-
 <section>
-<h3><dfn>Get Accessibility Properties for Accessible Node</dfn></h3>
+<h3><dfn>Get Accessibility Properties for Accessibility Node</dfn></h3>
 
   <table class="simple jsoncommand">
     <tr>
@@ -11234,16 +11217,14 @@ variables</var> and <var>parameters</var> are:
     <li><p><a>Try</a> to <a>handle any user prompts</a>
      with <var>session</var>.
 
-    <li><p>Let <var>node</var> be the result
-        of <a>trying</a> to <a>get a known accessible node</a>
-        with <var>URL variables</var>["<code>accessibility id</code>"].
+    <li><p>Let <var>node</var> be the <a>accessibility node</a> with <a>accessibility ID</a> matching the <var>URL variables</var>["<code>accessibility id</code>"]. If no such <a>accessibility node</a> exists, return <a>error</a> with <a>error code</a> <a>no such accessibility node</a>.
 
     <li><p>Let <var>properties</var> be the result of computing the <a>accessibility properties</a> of <var>node</var>.
 
     <li><p>Return <a>success</a> with data <var>properties</var>.
   </ol>
 
-</section> <!-- /Get Accessibility Properties for Accessible Node -->
+</section> <!-- /Get Accessibility Properties for Accessibility Node -->
 </section> <!-- /Accessibility -->
 
 <section>
@@ -11733,7 +11714,10 @@ to automatically sort each list alphabetically.
      in the Accessible Rich Internet Applications (WAI-ARIA) 1.2 specification: [[wai-aria-1.2]]
      <ul>
        <li><dfn><a href="https://w3c.github.io/aria/#introroles">WAI-ARIA role</a></dfn>
-       <li><dfn><a href="https://w3c.github.io/aria/#fixme">Computed accessible properties</a></dfn>
+       <li><dfn><a href="https://w3c.github.io/aria/#accessibility_tree">Accessibility tree</a></dfn>
+       <li><dfn><a href="https://w3c.github.io/aria/#dfn-accessibility-api">Accessibility API</a></dfn>
+       <li><dfn><a href="https://w3c.github.io/aria/#aria-hidden">aria-hidden</a></dfn>
+
      </ul>
 
   <dd>
@@ -11744,6 +11728,14 @@ to automatically sort each list alphabetically.
         <li><dfn><a href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te">Accessible
               Name and Description Computation</a></dfn>
       </ul>
+
+ <dd>
+   <p>The following terms are defined
+     in the Core Accessibility API Mappings (Core-AAM) 1.2 specification: [[core-aam-1.2]]
+     <ul>
+       <li><dfn><a href="https://w3c.github.io/core-aam/#computed_accessibility_properties">Computed accessibility properties</a></dfn>
+     </ul>
+
 
  <dt>Web App Security
  <dd><p>The following terms are defined
