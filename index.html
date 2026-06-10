@@ -11176,7 +11176,7 @@ variables</var> and <var>parameters</var> are:
 <section>
 <h2>Accessibility</h2>
 
-<p> An <dfn>accessibility ID</dfn> is a string value representing a handle to an <a>accessibility node</a> in a specific WebDriver session.
+<p> An <dfn>accessibility node ID</dfn> is a string value representing a handle to an <a>accessibility node</a> in a specific WebDriver session.
 
 <p> An <dfn>accessibility node</dfn> is a platform-independent, implementation-defined node in the platform-independent, implementation-defined accessibility tree. The platform-independent, implementation defined accessibility tree is built from the DOM tree for the purposes of interacting with the web page via an <a>accessibility API</a>. Accessibility nodes might exist in this tree for which there is no DOM element back it (for example, one might be created to represent a CSS pseudo element). Additionally, an accessibility node might not be created for every DOM node (for example, if something is intentionally hidden from accessibility APIs using <a>aria-hidden</a>). See the ARIA definition of the <a>accessibility tree</a> for more information.
 
@@ -11184,13 +11184,13 @@ variables</var> and <var>parameters</var> are:
 
   <dl>
    <dt>"<code>accessibilityId</code>"
-   <dd>The <a>accessibility ID</a> of this <a>accessibility node</a>.
+   <dd>The <a>accessibility node ID</a> of this <a>accessibility node</a>.
 
    <dt>"<code>parent</code>"
-   <dd>The <a>accessibility ID</a> of the parent of this <a>accessibility node</a> in the <a>accessibility tree</a>.
+   <dd>The <a>accessibility node ID</a> of the parent of this <a>accessibility node</a> in the <a>accessibility tree</a>.
 
    <dt>"<code>children</code>"
-   <dd>A list of <a>accessibility IDs</a> representing the child nodes of this <a>accessibility node</a> in the <a>accessibility tree</a>.
+   <dd>A list of <a>accessibility node IDs</a> representing the child nodes of this <a>accessibility node</a> in the <a>accessibility tree</a>.
   </dl>
 
 <section>
@@ -11217,7 +11217,7 @@ variables</var> and <var>parameters</var> are:
     <li><p><a>Try</a> to <a>handle any user prompts</a>
      with <var>session</var>.
 
-    <li><p>Let <var>node</var> be the <a>accessibility node</a> with <a>accessibility ID</a> matching the <var>URL variables</var>["<code>accessibility id</code>"]. If no such <a>accessibility node</a> exists, return <a>error</a> with <a>error code</a> <a>no such accessibility node</a>.
+    <li><p>Let <var>node</var> be the <a>accessibility node</a> with <a>accessibility node ID</a> matching the <var>URL variables</var>["<code>accessibility id</code>"]. If no such <a>accessibility node</a> exists, return <a>error</a> with <a>error code</a> <a>no such accessibility node</a>.
 
     <li><p>Let <var>properties</var> be the result of computing the <a>accessibility properties</a> of <var>node</var>.
 
