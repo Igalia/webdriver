@@ -11175,24 +11175,6 @@ variables</var> and <var>parameters</var> are:
 
 <section>
 <h2>Accessibility</h2>
-
-<p> An <dfn>accessibility node ID</dfn> is a string value representing a handle to an <a>accessibility node</a> in a specific WebDriver session.
-
-<p> An <dfn>accessibility node</dfn> is a platform-independent, implementation-defined node in the platform-independent, implementation-defined accessibility tree. The platform-independent, implementation defined accessibility tree is built from the DOM tree for the purposes of interacting with the web page via an <a>accessibility API</a>. Accessibility nodes might exist in this tree for which there are no DOM element backing them (for example, one might be created to represent a CSS pseudo element). Additionally, an accessibility node might not be created for every DOM node (for example, if something is intentionally hidden from accessibility APIs using <a>aria-hidden</a>). See the ARIA definition of the <a>accessibility tree</a> for more information.
-
-<p> <dfn>Accessibility properties</dfn> is a JSON <a>Object</a> that contains the <a>computed accessibility properties</a> of an <a>accessibility node</a>, as well as the following properties:
-
-  <dl>
-   <dt>"<code>accessibilityId</code>"
-   <dd>The <a>accessibility node ID</a> of this <a>accessibility node</a>.
-
-   <dt>"<code>parent</code>"
-   <dd>The <a>accessibility node ID</a> of the parent of this <a>accessibility node</a> in the <a>accessibility tree</a>.
-
-   <dt>"<code>children</code>"
-   <dd>An <a>Array</a> of <a>accessibility node IDs</a> representing the child nodes of this <a>accessibility node</a> in the <a>accessibility tree</a>.
-  </dl>
-
 <section>
 <h3><dfn>Get Accessibility Properties for Accessibility Node</dfn></h3>
 
@@ -11733,7 +11715,16 @@ to automatically sort each list alphabetically.
    <p>The following terms are defined
      in the Core Accessibility API Mappings (Core-AAM) 1.2 specification: [[core-aam-1.2]]
      <ul>
-       <li><dfn><a href="https://w3c.github.io/core-aam/#computed_accessibility_properties">Computed accessibility properties</a></dfn>
+       <!-- Computed accessibility properties --> <li><dfn><a
+        href="https://w3c.github.io/core-aam/#computed_accessibility_properties">Computed accessibility properties</a></dfn>
+       <!-- Accessibility node --> <li><dfn><a
+        href="https://w3c.github.io/core-aam/#computed_accessibility_properties">Accessibility node</a></dfn>
+       <!-- accessibilityId --> <li><dfn><a
+        href="https://w3c.github.io/core-aam/#computed_accessibility_properties_aria_states_and_properties">accessibilityId</a></dfn>
+        <!-- parent --> <li><dfn><a
+        href="https://w3c.github.io/core-aam/#computed_accessibility_properties_aria_states_and_properties">parent</a></dfn>
+        <!-- children --> <li><dfn><a
+        href="https://w3c.github.io/core-aam/#computed_accessibility_properties_aria_states_and_properties">children</a></dfn>
      </ul>
 
 
